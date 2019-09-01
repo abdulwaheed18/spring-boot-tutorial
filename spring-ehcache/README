@@ -1,0 +1,29 @@
+=================== Spring Swagger Tutorial =======================
+1. Add dependency
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		
+		<!-- ehcache dependency. -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+
+2. Add @EnableCaching annotation in your main Spring Boot application to enable the Ehcache.
+
+3. Create a new xml file name ehcache.xml under resources  and add your cache detail
+
+4. Chechk @Cachable, @CachePut and @CacheEvict annotation to understand how to cache, update or delete from Ehcache
+	@Cachable: Is used to adding the cache behaviour to a method. We can also give the name to it, where the cache results would be saved.
+	@CacheEvict: Is used to remove the one or more cached values. allEntries=true parameter allows us to remove all entries from the cache.
+	@CachePut: Is used to update the cached value.
+	Check UserServiceImpl class for Implementation
+	
+5. I have enabled Actuator using which you can see cach size and other metrics. 
+	Check cachedetail.jpg
+	
+	Try adding,deleting values and see how it is reflecting into cache metrices
+	
+Ehcache Documentation: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html
