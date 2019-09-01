@@ -1,0 +1,53 @@
+
+
+=================== Spring Swagger Tutorial =======================
+
+1. Add below dependency to support Swagger
+	 <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger2</artifactId>
+         <version>2.7.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger-ui</artifactId>
+         <version>2.7.0</version>
+      </dependency>
+	  
+2. Add @EnableSwagger2 annotation in your main Spring Boot application to enable the Swagger2 .
+
+3. Create Docket Bean to configure Swagger2 for your Spring Boot application. Check SwaggerConfig class
+
+	   @Bean
+	   public Docket productApi() {
+		  return new Docket(DocumentationType.SWAGGER_2).select()
+			 .apis(RequestHandlerSelectors.basePackage("com.waheedtechblog.springswagger2")).build();
+	   }
+4. Add Controller as implemented in example . UserController
+
+5. hit http://localhost:8080/v2/api-docs to see detail of API exposing our application.
+	Check api-docs.jpg file
+	
+6. You can check same via Swagger UI as well , hit http://localhost:8080/swagger-ui.html
+	check swagger-ui.jpg 
+	
+7. You must have realized that swagger AdI info like API document is not relevant, Lets see how can we modify it.
+	Check APIInfo under SwaggerConfig class
+	Check APIInfoUpdated.jpg for updated screenshot
+
+8. How to set type of Content it is going to produce and consume
+	Check APIInfo under SwaggerConfig class
+	Cehck ContentType.jpg file
+	
+9. USe @ApiModel and @ApiModelProperty to add description about class and its porperty.
+	Check Users class
+	Check users.jpg file
+
+10. Add @Api annotation on our UserController class to describe our API.
+	Check UserController class
+	Check userApi.jpg file
+	
+11. Use @ApiOperation annotation to describe each endpoint and its response type
+	Check UserController class
+	Check UserApiOperation.jpg file
