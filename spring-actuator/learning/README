@@ -1,0 +1,82 @@
+
+==================Spring Boot Actuator Tutorial ==========================
+1. To add Actuator Dependency to your spring boot application, Add
+			<!-- Actuator Dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	
+	For easy Browsing, You can add HAL browser dependency as well
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-hal-browser</artifactId>
+		</dependency>
+		
+	For quick developement, I am also using devtools
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		
+		
+2. Start the application and hit localhost:8080 (8080 is default port of my application) which will enables HAL browser, Add /actuator under explorer and go, It will list down all the Actuator Endpoints (By default, only the health and info endpoints are exposed over HTTP)
+	Check HalBrowser1.PNG under screenshot
+	
+3. There are many more endpoints which are currently disabled. To enable it, Add below value to application.properties 
+		management.endpoints.web.exposure.include=*
+	Restart the application (If you have devtools then it will do it for you ) and hit again HAL browser by hitting localhost:8080
+	Check HalBrowser2.PNG under screenshot
+
+4.Now Click on any endpoint, it will show you the details, Ex: We want all the env variable so just click on it and it will display all the env variables
+	Check ENV.jpg 
+	Similarly, you can check for health, status, metrics and show on
+	
+5. Some of the useful actuator endpoints are:
+
+	- env: provides information about the Spring Environment properties.
+	- health: Shows application health
+	- beans: this endpoint returns the list of all the beans configured in our application.
+	- info: Displays application information, we can configure this in Spring environment properties.
+	- mappings: Displays the list of all @RequestMapping paths.
+	- shutdown: allows us to gracefully shutdown the application.
+	- threaddump: provides the thread dump of the application.
+	
+6. If you hit /info then you must have realized that it is not showing any information. Why?  because we have not set any value to Info.
+			Check EmptyInfo.jpg file
+	To set it, add value to info under application.properties file
+		# Set info value
+		info.app.name=Spring Actuator Tutorial
+		info.app.java.version=8
+		info.app.type=Spring Boot application
+	Check InfoWithDetails.jpg files
+	
+7. By default, the health endpoint only shows a  UP or DOWN status. To get the complete details, add the following property in the application.properties file 
+		management.endpoint.health.show-details=always
+	Check health.jpg file
+	HEalth will show you detail of databases as well if you application has any db connection
+	
+8. We also check for logger level and the best part, you can update it without restarting application which can be really helpful in many situations
+	Current log level
+		Check logger.jpg file
+	To update the logger 
+		check updateLogger file to update root level log from INFO to DEBUG
+	Check updatedLogger.jpg file to see after logger level updation
+	And your will start logging DEBUG level LOG as well 
+	
+9. Customizing Actuator End Points Base Path
+	As we know, By default base-path of actuator endpoints is /actuator, we can change it to any other value by setting management.endpoints.web.base-path in application properties file.
+		management.endpoints.web.base-path=/management
+
+10. How to enable new Endpoint (Custom Endpoints )
+	if you want to expose some detail of application or any other information detail via actuator endpoint, you can do it by exposing new actutaor Endpoint
+		Check class NewActuatorEndpoint to know more about endpoint
+		Check NewEndpoint.jpg file after adding to it.
+		Check NewEndpointMessage.JPG file to see response
+		
+		
+If you are interested in more details then you can refer spring document over here
+	https://docs.spring.io/spring-boot/docs/2.2.0.BUILD-SNAPSHOT/reference/html/production-ready-features.html
