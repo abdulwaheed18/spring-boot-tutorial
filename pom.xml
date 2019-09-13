@@ -15,6 +15,10 @@
 
 	<modules>
 		<module>spring-actuator</module>
+		<module>spring-data-jpa</module>
+		<module>spring-ehcache</module>
+		<module>spring-swagger2</module>
+		<module>spring-logger</module>
 	</modules>
 
 </project>
