@@ -1,0 +1,31 @@
+
+==================== Spring Boot SLF4J logback Tutorial =============
+
+1. You don't need to add any additional dependency as logger will comes with Spring boot starter project.
+
+2. Add logger into your project as I did in userController class
+	- Declare logger instance : private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+	- Use logger.<LEVEL> to log messgaes
+	- I have added two logs in UsersController#getUser(...) 
+
+3. Start the application and hit /users/1 API from Broswer.You will observe that info LEVEL logs are getting printed on console and its skipping DEBUG LEVEL logs
+	- Reason: BY default Spring support INFO LEVEL log means INFO and higher level will get printed and will skip DEBUG and TRACE.
+	
+4. You can set it to DEBUG level by configuring it to properties file
+	- Check #1 under application.properties file
+
+5. Restart the application (No need if you have Devtools in your classpath as it will restart itself ) and check the log now. It will print both logs now
+
+6. You can change the logging pattern as well by adding pattern to application.properties file	
+	- Check #2 under application.properties file
+	
+7. Most of the time, adding everything to application.properties make things tedious. We can seperate it by adding new file especially for logger, Spring check for below files under 	   classpath in the same order
+	logback-spring.xml
+    logback.xml
+    logback-spring.groovy
+    logback.groovy
+
+8. Let's first add logback.xml file and add multiples appenders
+	check logback.xml under resources
+	
+9. Restart the application and you will observe that logs are getting logged in console as well as in logging file in your project
