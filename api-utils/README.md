@@ -13,6 +13,8 @@ Contributor: Abdul Waheed [abdulwaheed18@gmail.com]
   * Enabling https in your application
   * Swagger Integeration with your application
   * Interceptor - How to log request/ response of your application
+  * Sleuth support - Add unique traceId to each http request and incase of error, will send 
+    as Id for debugging purpose.
   
 ## Swagger UI
 

@@ -8,8 +8,11 @@ import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import springfox.documentation.builders.ParameterBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -31,10 +34,19 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket api() {
+
+		// Adding Static headers
+		ParameterBuilder aParameterBuilder = new ParameterBuilder();
+		aParameterBuilder.name("Authorization") // name of header
+				.modelRef(new ModelRef("string")).parameterType("header") // type - header
+				.defaultValue("Basic c878w9ctihkjjkbakbkd").required(true).build();
+		java.util.List<Parameter> aParameters = new ArrayList<>();
+		aParameters.add(aParameterBuilder.build());
+
 		// API_INFO to update document information like version, developer contact
 		// detail etc
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(DEFAULT_API_INFO).produces(DEFAULT_CONTENT_TYPE)
-				.consumes(DEFAULT_CONTENT_TYPE);
+				.consumes(DEFAULT_CONTENT_TYPE).globalOperationParameters(aParameters);
 	}
 
 }

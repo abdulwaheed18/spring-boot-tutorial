@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.waheedtechblog.springswagger2.domain.Users;
 import com.waheedtechblog.springswagger2.service.UserService;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,14 +29,13 @@ import io.swagger.annotations.ApiResponses;
  */
 @RestController
 @RequestMapping("/users")
-@Api(description = "Endpoint to handle to perform operation on users")
 public class UsersController {
 
 	@Autowired
 	private UserService userService;
 
 	@GetMapping("/{id}")
-	@ApiOperation(value = "returns the user object if exist", response = Users.class, produces = "application/json", consumes = "application/json")
+	@ApiOperation(value = "returns the user object if exist", response = Users.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved user"),
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),

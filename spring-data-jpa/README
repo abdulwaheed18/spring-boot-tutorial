@@ -11,3 +11,34 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+2. Create a class USer and marked it as @Entity which will tell JPA that this class need to be persistent in DB.
+	Mark class with @Entity, @Table, @Id, @GeneratedValue
+	Check class Users.class
+	
+3. Start the application and you will see below logs on your console
+	Hibernate: drop table users if exists
+	Hibernate: drop sequence if exists hibernate_sequence
+	Hibernate: create sequence hibernate_sequence start with 1 increment by 1
+	Hibernate: create table users (id varchar(255) not null, dob date, email varchar(255), fisrt_name varchar(255) not null, last_name varchar(255), primary key (id))
+
+4. How to check in memory database and check tables?
+	Goto your browswer and hit http://localhost:8080/h2-console (Check inmemurl.jpg file)
+	Check createTableMem.jpg to create tables
+	
+5. Create an interface and extends JpaRespository<TABLE_NAME,PRIMARY_KEY>
+	- Check interface UsersDaoRepository
+	JpaRespository analyses all the methods defined by the interfaces and tries to automatically generate queries from the method names.
+	I have added multiple examples in our code to understand it in easier way
+	- Check JPA docs to learn in more details
+		https://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+		
+6. I have added few entries under SpringDataJpaApplication class and restart the application, it will add the new entry to db
+	Hibernate: insert into users (dob, email, first_name, last_name, id) values (?, ?, ?, ?, ?)
+	Hibernate: insert into users (dob, email, first_name, last_name, id) values (?, ?, ?, ?, ?)
+	Hibernate: insert into users (dob, email, first_name, last_name, id) values (?, ?, ?, ?, ?)
+	- CHeck inMemTable.jpg file
+	It will confirm tht our JPA implementation is working and it is saving the entry to database.
+	
+7. Similarly, now hit all the exposed REST API to see the result
+	- getAPI.jpg to check GEt API
+	- AllUsers.jpg to fect all users

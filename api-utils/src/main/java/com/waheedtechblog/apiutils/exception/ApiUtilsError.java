@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ApiUtilsError {
 
+	private String id;
 	private HttpStatus status;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private LocalDateTime timestamp;
@@ -20,8 +21,9 @@ public class ApiUtilsError {
 		timestamp = LocalDateTime.now();
 	}
 
-	ApiUtilsError(HttpStatus status) {
+	ApiUtilsError(String id, HttpStatus status) {
 		this();
+		this.id = id;
 		this.status = status;
 	}
 
@@ -32,11 +34,20 @@ public class ApiUtilsError {
 		this.debugMessage = ex.getLocalizedMessage();
 	}
 
-	ApiUtilsError(HttpStatus status, String message, Throwable ex) {
+	ApiUtilsError(String id, HttpStatus status, String message, Throwable ex) {
 		this();
+		this.id = id;
 		this.status = status;
 		this.message = message;
 		this.debugMessage = ex.getLocalizedMessage();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public HttpStatus getStatus() {
