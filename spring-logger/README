@@ -29,3 +29,5 @@
 	check logback.xml under resources
 	
 9. Restart the application and you will observe that logs are getting logged in console as well as in logging file in your project
+
+10. Added the support for log streaming
