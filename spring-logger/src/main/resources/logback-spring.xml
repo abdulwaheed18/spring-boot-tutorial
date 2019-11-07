@@ -38,23 +38,30 @@
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<!-- keep 1 day' worth of history capped at 10MB total size -->
-				<maxHistory>1</maxHistory>
 				<maxFileSize>10MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
+	</appender>
+	
+	<appender name="elk" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>localhost:4560</destination>
+		<!-- encoder is required -->
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
 	</appender>
 
 	<!-- LOG everything at INFO level -->
 	<root level="info">
 		<appender-ref ref="RollingFile" />
 		<appender-ref ref="Console" />
+		<appender-ref ref="elk" />
 	</root>
 
-	<!-- LOG "com.waheedtechblog*" at TRACE level -->
+	<!-- LOG "com.waheedtechblog*" at TRACE level 
 	<logger name="com.waheedtechblog" level="trace"
 		additivity="false">
 		<appender-ref ref="RollingFile" />
 		<appender-ref ref="Console" />
-	</logger>
+		<appender-ref ref="elk" />
+	</logger> -->
 
 </configuration>
